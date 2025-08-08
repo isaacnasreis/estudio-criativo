@@ -28,6 +28,7 @@ function App() {
   const [personagens, setPersonagens] = useState(mockPersonagens);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [personagemParaEditar, setPersonagemParaEditar] = useState(null);
 
   const [novoPersonagem, setNovoPersonagem] = useState({
     nome: "",
@@ -45,14 +46,49 @@ function App() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    setPersonagens((personagensAtuais) => [
-      ...personagensAtuais,
-      {
-        id: Date.now(),
-        ...novoPersonagem,
-      },
-    ]);
+    if (personagemParaEditar) {
+      setPersonagens((personagensAtuais) =>
+        personagensAtuais.map((p) =>
+          p.id === personagemParaEditar.id ? novoPersonagem : p
+        )
+      );
+    } else {
+      setPersonagens((personagensAtuais) => [
+        ...personagensAtuais,
+        {
+          id: Date.now(),
+          ...novoPersonagem,
+        },
+      ]);
+    }
 
+    setNovoPersonagem({ nome: "", sinopse: "" });
+    setPersonagemParaEditar(null);
+    setIsModalOpen(false);
+  };
+
+  const handleDeletePersonagem = (idParaExcluir) => {
+    if (window.confirm("Tem certeza que deseja excluir este personagem?")) {
+      setPersonagens((personagensAtuais) =>
+        personagensAtuais.filter((p) => p.id !== idParaExcluir)
+      );
+    }
+  };
+
+  const handleOpenEditModal = (personagem) => {
+    setPersonagemParaEditar(personagem);
+    setNovoPersonagem(personagem);
+    setIsModalOpen(true);
+  };
+
+  const handleOpenCreateModal = () => {
+    setPersonagemParaEditar(null);
+    setNovoPersonagem({ nome: "", sinopse: "" });
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setPersonagemParaEditar(null);
     setNovoPersonagem({ nome: "", sinopse: "" });
     setIsModalOpen(false);
   };
@@ -110,21 +146,28 @@ function App() {
         </div>
         <button
           className={styles.primaryButton}
-          onClick={() => setIsModalOpen(true)}
+          onClick={handleOpenCreateModal}
         >
           + Criar Novo Personagem
         </button>
 
         <div className={styles.characterGrid}>
           {personagens.map((p) => (
-            <CharacterCard key={p.id} personagem={p} />
+            <CharacterCard
+              key={p.id}
+              personagem={p}
+              onDelete={handleDeletePersonagem}
+              onEdit={handleOpenEditModal}
+            />
           ))}
         </div>
       </main>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <form onSubmit={handleFormSubmit}>
-          <h2 className={styles.formTitle}>Novo Personagem</h2>
+          <h2 className={styles.formTitle}>
+            {personagemParaEditar ? "Editar Personagem" : "Novo Personagem"}
+          </h2>
 
           <div className={styles.formGroup}>
             <label htmlFor="nome" className={styles.formLabel}>
@@ -158,12 +201,12 @@ function App() {
 
           <div className={styles.formActions}>
             <button type="submit" className={styles.primaryButton}>
-              Salvar Personagem
+              {personagemParaEditar ? "Salvar Alterações" : "Salvar Personagem"}
             </button>
             <button
               type="button"
               className={styles.secondaryButton}
-              onClick={() => setIsModalOpen(false)}
+              onClick={handleCloseModal}
             >
               Cancelar
             </button>
