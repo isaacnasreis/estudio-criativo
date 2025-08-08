@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./App.module.css";
 import CharacterCard from "./components/CharacterCard";
+import Modal from "./components/Modal";
 
 const mockPersonagens = [
   {
@@ -25,6 +26,36 @@ const mockPersonagens = [
 
 function App() {
   const [personagens, setPersonagens] = useState(mockPersonagens);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [novoPersonagem, setNovoPersonagem] = useState({
+    nome: "",
+    sinopse: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNovoPersonagem((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    setPersonagens((personagensAtuais) => [
+      ...personagensAtuais,
+      {
+        id: Date.now(),
+        ...novoPersonagem,
+      },
+    ]);
+
+    setNovoPersonagem({ nome: "", sinopse: "" });
+    setIsModalOpen(false);
+  };
 
   return (
     <div className={styles.container}>
@@ -77,7 +108,10 @@ function App() {
             narrativas mais ricas.
           </p>
         </div>
-        <button className={styles.primaryButton}>
+        <button
+          className={styles.primaryButton}
+          onClick={() => setIsModalOpen(true)}
+        >
           + Criar Novo Personagem
         </button>
 
@@ -87,6 +121,55 @@ function App() {
           ))}
         </div>
       </main>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <form onSubmit={handleFormSubmit}>
+          <h2 className={styles.formTitle}>Novo Personagem</h2>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="nome" className={styles.formLabel}>
+              Nome
+            </label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              className={styles.formInput}
+              value={novoPersonagem.nome}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="sinopse" className={styles.formLabel}>
+              Sinopse
+            </label>
+            <textarea
+              id="sinopse"
+              name="sinopse"
+              className={styles.formInput}
+              rows="4"
+              value={novoPersonagem.sinopse}
+              onChange={handleInputChange}
+              required
+            ></textarea>
+          </div>
+
+          <div className={styles.formActions}>
+            <button type="submit" className={styles.primaryButton}>
+              Salvar Personagem
+            </button>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={() => setIsModalOpen(false)}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }
