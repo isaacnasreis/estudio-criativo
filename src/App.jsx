@@ -9,18 +9,35 @@ const mockPersonagens = [
     nome: "Anya Sharma",
     sinopse:
       "Uma detetive cibernética que caça IAs desonestas em uma Neo-Delhi chuvosa.",
+    imagemUrl:
+      "https://m.media-amazon.com/images/M/MV5BZWM1Mzk1NTYtZGQ4Ny00YmEzLTk4ZTUtZGQwZmNhNTg0YjU0XkEyXkFqcGc@._V1_.jpg",
+    historia:
+      'Órfã após o "Grande Apagão de IA", Anya foi criada nas ruas de neon, desenvolvendo um ódio e uma fascinação por inteligências artificiais. Foi recrutada pela Divisão de Crimes Cibernéticos por sua habilidade única de prever os movimentos de IAs.',
+    personalidade:
+      "Cínica e pragmática, mas com um forte senso de justiça. Viciada em café sintético e música Lo-Fi antiga.",
   },
   {
     id: 2,
     nome: "Kaelen",
     sinopse:
       "O último elfo de uma floresta esquecida, em uma busca para restaurar a magia.",
+    imagemUrl:
+      "https://m.media-amazon.com/images/M/MV5BZWM1Mzk1NTYtZGQ4Ny00YmEzLTk4ZTUtZGQwZmNhNTg0YjU0XkEyXkFqcGc@._V1_.jpg",
+    historia:
+      "Viu sua floresta natal murchar com o avanço da industrialização. Carrega a última semente da Árvore-Coração e viaja pelo mundo em busca de um solo puro onde a magia possa renascer.",
+    personalidade:
+      "Sábio, melancólico e desconfiado dos humanos, mas com uma esperança inabalável. Fala pouco, mas suas palavras têm grande peso.",
   },
   {
     id: 3,
     nome: "Capitã Eva Rostova",
     sinopse:
       "Uma piloto de cargueiro espacial que descobre uma conspiração intergaláctica.",
+    imagemUrl: "",
+    historia:
+      'Ex-piloto de caça da Aliança, foi expulsa por insubordinação. Agora, vive transportando cargas questionáveis nos confins da galáxia com sua nave, a "Andarilha".',
+    personalidade:
+      "Corajosa, teimosa e leal à sua pequena tripulação. Resolve a maioria dos problemas com um blaster ou uma piada sarcástica.",
   },
 ];
 
@@ -185,6 +202,21 @@ function App() {
           </div>
 
           <div className={styles.formGroup}>
+            <label htmlFor="imagemUrl" className={styles.formLabel}>
+              URL da Imagem
+            </label>
+            <input
+              type="text"
+              id="imagemUrl"
+              name="imagemUrl"
+              className={styles.formInput}
+              value={novoPersonagem.imagemUrl}
+              onChange={handleInputChange}
+              placeholder="./public/img-de-teste.png"
+            />
+          </div>
+
+          <div className={styles.formGroup}>
             <label htmlFor="sinopse" className={styles.formLabel}>
               Sinopse
             </label>
@@ -196,6 +228,34 @@ function App() {
               value={novoPersonagem.sinopse}
               onChange={handleInputChange}
               required
+            ></textarea>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="historia" className={styles.formLabel}>
+              História de Fundo
+            </label>
+            <textarea
+              id="historia"
+              name="historia"
+              className={styles.formInput}
+              rows="6"
+              value={novoPersonagem.historia}
+              onChange={handleInputChange}
+            ></textarea>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="personalidade" className={styles.formLabel}>
+              Personalidade / Traços
+            </label>
+            <textarea
+              id="personalidade"
+              name="personalidade"
+              className={styles.formInput}
+              rows="4"
+              value={novoPersonagem.personalidade}
+              onChange={handleInputChange}
             ></textarea>
           </div>
 
