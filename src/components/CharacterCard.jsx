@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./CharacterCard.module.css";
 
-const PLACEHOLDER_IMAGE = "https://placehold.co/600x400?text=Personagem";
+const PLACEHOLDER_IMAGE =
+  "https://fastly.picsum.photos/id/760/200/300.jpg?hmac=V3yvSu3sykZMdt6gvj7uKDb8WPm1mltpcdIah8vfZpU";
 
 function CharacterCard({ personagem, onDelete, onEdit }) {
   const [imgSrc, setImgSrc] = useState(
