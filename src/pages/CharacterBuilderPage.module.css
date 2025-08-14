@@ -1,0 +1,17 @@
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.characterGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}

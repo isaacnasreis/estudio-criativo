@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../App.module.css";
+import styles from "./CharacterBuilderPage.module.css";
 import CharacterCard from "../components/CharacterCard";
 import Modal from "../components/Modal";
 
@@ -117,7 +117,7 @@ function CharacterBuilderPage() {
           narrativas mais ricas.
         </p>
       </div>
-      <button className={styles.primaryButton} onClick={handleOpenCreateModal}>
+      <button className="primaryButton" onClick={handleOpenCreateModal}>
         + Criar Novo Personagem
       </button>
 
@@ -134,48 +134,48 @@ function CharacterBuilderPage() {
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <form onSubmit={handleFormSubmit}>
-          <h2 className={styles.formTitle}>
+          <h2 className="formTitle">
             {personagemParaEditar ? "Editar Personagem" : "Novo Personagem"}
           </h2>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="nome" className={styles.formLabel}>
+          <div className="formGroup">
+            <label htmlFor="nome" className="formLabel">
               Nome
             </label>
             <input
               type="text"
               id="nome"
               name="nome"
-              className={styles.formInput}
+              className="formInput"
               value={novoPersonagem.nome}
               onChange={handleInputChange}
               required
             />
           </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="imagemUrl" className={styles.formLabel}>
+          <div className="formGroup">
+            <label htmlFor="imagemUrl" className="formLabel">
               URL da Imagem
             </label>
             <input
               type="text"
               id="imagemUrl"
               name="imagemUrl"
-              className={styles.formInput}
+              className="formInput"
               value={novoPersonagem.imagemUrl}
               onChange={handleInputChange}
               placeholder="./public/img-de-teste.png"
             />
           </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="sinopse" className={styles.formLabel}>
+          <div className="formGroup">
+            <label htmlFor="sinopse" className="formLabel">
               Sinopse
             </label>
             <textarea
               id="sinopse"
               name="sinopse"
-              className={styles.formInput}
+              className="formInput"
               rows="4"
               value={novoPersonagem.sinopse}
               onChange={handleInputChange}
@@ -183,41 +183,41 @@ function CharacterBuilderPage() {
             ></textarea>
           </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="historia" className={styles.formLabel}>
+          <div className="formGroup">
+            <label htmlFor="historia" className="formLabel">
               História de Fundo
             </label>
             <textarea
               id="historia"
               name="historia"
-              className={styles.formInput}
+              className="formInput"
               rows="6"
               value={novoPersonagem.historia}
               onChange={handleInputChange}
             ></textarea>
           </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="personalidade" className={styles.formLabel}>
+          <div className="formGroup">
+            <label htmlFor="personalidade" className="formLabel">
               Personalidade / Traços
             </label>
             <textarea
               id="personalidade"
               name="personalidade"
-              className={styles.formInput}
+              className="formInput"
               rows="4"
               value={novoPersonagem.personalidade}
               onChange={handleInputChange}
             ></textarea>
           </div>
 
-          <div className={styles.formActions}>
-            <button type="submit" className={styles.primaryButton}>
+          <div className="formActions">
+            <button type="submit" className="primaryButton">
               {personagemParaEditar ? "Salvar Alterações" : "Salvar Personagem"}
             </button>
             <button
               type="button"
-              className={styles.secondaryButton}
+              className="secondaryButton"
               onClick={handleCloseModal}
             >
               Cancelar
