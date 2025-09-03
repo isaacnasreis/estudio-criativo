@@ -1,5 +1,9 @@
 # Estúdio Criativo
 
+<p align="center">
+  <img src="./public/preview.png" alt="Preview do Portfolio" width="800"/>
+</p>
+
 Bem-vindo ao Estúdio Criativo, o seu assistente inteligente de narrativas!
 
 Este projeto é uma ferramenta web projetada para escritores, roteiristas e contadores de histórias. A ideia central não é apenas ser um local para armazenar suas criações, mas uma plataforma que ativamente auxilia no desenvolvimento de narrativas ricas e complexas.
